@@ -1,0 +1,528 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
+body{
+
+    --bg-color-1:#fff;
+    --bg-color-2: #f5f9fc;
+    --border-1: rgba(177, 170, 170, 0.767);
+    --border-2: rgb(28, 125, 204);
+    --navbar-hover-1: #f5f9fc;
+    --navbar-hover-2: #fff;
+    --text-color-1:#000000;
+    --text-color-2: #147ed4;
+    --filter-border: #9ecaed;
+    --box-shadow: 0 .5rem 1rem rgba(0,0,0,.1) ;
+    --grad:linear-gradient(0deg,#0098f0,#00f2c3);
+    --hoverTheme-light:#9ecaed;
+    background-color: var(--bg-color-2);
+}
+
+body .myImg_white{
+    display: none;
+}
+
+body.active{
+
+    --bg-color-11:  #2d2d30; /*#2A2B35*    #262433/  #1A1A23*/
+    --bg-color-22:#252526;
+    --bg-color-1:  #242526; /*#2A2B35*    #262433/  #1A1A23*/
+    --bg-color-2:#18191A;
+    --text-color-1:#aaaaaf;
+    --text-color-2:#FAFAFC;
+    --border-1: #31374a;
+    --border-2: #31374a;
+    --border-3: #31374a;
+    --navbar-hover-1: #232a41c5;
+    --navbar-hover-2: #141824;
+
+
+    --text-color-2: #147ed4;
+    --filter-border: #9ecaed;
+    --box-shadow: 0 .5rem 1rem rgba(0,0,0,.1) ;
+    /*--grad:linear-gradient(0deg,#0098f0,#00f2c3);*/
+    --hoverTheme-light:#ebbb84cb;
+    background-color: var(--bg-color-2);
+    
+ 
+}
+
+
+  
+body.active .myImg_dark{
+    display: none;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.hide-top{
+    position: fixed;
+    display: flex;
+    width: 100%;
+    height: 25px;
+    z-index: 90;
+    background-color: var(--bg-color-2);
+}
+
+  .navbar {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-color-1);
+    border-top: 2.5px solid var(--border-2);
+    border-bottom: 1.5px solid var(--border-1);
+    height: 75px;
+    left: 25px;
+    width: calc(100% - 50px);
+    z-index: 100;
+    top: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 35px 0px rgba(171, 158, 154, 0.15);
+  }
+
+
+
+  /* this is for text and icon togther in logo */
+  .navbar .logo {
+    height: 75px;
+    display: flex;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+    align-items: center;
+    /*justify-content: center;*/
+  }
+
+  /* change size and color of icon */
+  .navbar .logo img {
+    height: 26px;
+    padding-right: 25px;
+    padding-bottom: 5px;
+  }
+
+  /* change size and color text in logo */
+  .navbar .logo .logo_name {
+    font-size: 22px;
+    font-weight: 500;
+    color: var( --text-color-1);
+  }
+
+
+  .navbar .top-button {
+    color:var( --text-color-1);
+    font-size: 25px;
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  .navbar .top-button i{
+    cursor: pointer;
+  }
+
+
+  .navbar .ThemeBtn-container {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    right: 3%;
+    border-radius: 100%;
+    opacity: 1;
+    background-color: var(--bg-color-1);
+    display: flex;
+    align-items: center; /* dosent work with the deafult display: block so i changed to flex so it will work*/
+  }
+
+  .navbar .ThemeBtn-container #theme-btn {
+    padding-left: 8px; /* center icon in container*/
+    cursor: pointer;
+    font-size: 24px;
+    color: var( --text-color-1);
+  }
+
+  .navbar .ThemeBtn-container:hover {
+    background-color: var(--hoverTheme-light);
+    transition: all 0.5s ease;
+  }
+
+  .navbar .ThemeBtn-container #theme-btn:hover{
+    color: var(--bg-color-1);
+  } 
+
+.sidebar{
+    position: fixed;
+    height: calc(100% - 150px);
+    top: 125px;
+    left: 25px;
+    bottom: 25px;
+    width: 260px;
+    background-color: var(--bg-color-1);
+    z-index: 100;
+    border-right: 1px solid var(--border-1);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.sidebar.close{
+    width: 78px;
+}
+
+.sidebar .nav-links{
+    height: 100%;
+    padding-top: 25px;
+    overflow: auto;
+}
+
+.sidebar.close .nav-links{
+    overflow: visible;
+    padding-left: 0;
+}
+
+.sidebar .nav-links::-webkit-scrollbar{
+    display: none;
+}
+
+.sidebar .nav-links li{
+    position: relative;
+    list-style: none;
+    justify-content: space-between;
+    transition: all 0.4s ease; /* the time it takes to show hover effect*/
+
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 6px;
+}
+
+.sidebar .nav-links li:hover{
+    background-color: var(--navbar-hover-1);
+}
+
+/*submenu with open sidebar link backround set to white */
+.sidebar .nav-links .showMenu li:hover{
+    background-color: var(--bg-color-1); 
+}
+
+/*submenu with close sidebar links backround set to dark */
+.sidebar.close .nav-links .showMenu li:hover{
+    background-color: var(--bg-color-2);
+}
+
+.sidebar .nav-links li .icon-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    justify-content: space-between; 
+}
+
+
+.sidebar.close .nav-links li .icon-links{
+    display: block;
+}
+
+.sidebar .nav-links li i{
+    height: 35px;
+    min-width: 50px;    /* width if div that contain icon only */
+    text-align: center; /* centers vertically icon in min width box */
+    line-height: 35px;  /* centers horzantily */
+    color: var(--text-color-1);
+    font-size: 14px; /*link size */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* text color when link is active*/
+.sidebar .nav-links .active-link  i{
+    color: #147ed4;
+    font-weight: 600;
+}
+
+.sidebar .nav-links li.showMenu i.arrow{
+transform: rotate(90deg); /* when clicked rotate arrow by 990 degrees*/
+}
+
+
+.sidebar.close .nav-links i.arrow{
+    display: none;
+}
+
+.sidebar .nav-links li a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.sidebar .nav-links li a .link_name{
+    font-size: 14px; /*nane size */
+    font-weight: 400;
+    color: var(--text-color-1);
+    transition: all 0.1s ease;
+}
+
+
+/* text color when link is active*/
+.sidebar .nav-links .active-link .link_name{
+    color: var(--text-color-2);
+    font-weight: 600;
+}
+
+
+.sidebar.close .nav-links li a .link_name{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sidebar .nav-links li .sub-menu{
+    padding: 6px 6px 14px 80px;
+    margin-top: 1px; /* not sure i loke this */
+    background-color: var(--bg-color-1);
+    display: none; /* hides sub menu */
+}
+
+/* we add showmenue class using javascript on click event*/
+.sidebar .nav-links li.showMenu .sub-menu{
+    display: block;
+    font-weight: 500;
+}
+
+.sidebar .nav-links li .sub-menu a{
+    color: var(--text-color-1);
+    font-size: 14px; /*submenu names*/
+    padding: 5px 0 5px 10px;
+    white-space: nowrap;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+/* text color when link is active*/
+.sidebar .nav-links li.showMenu ul.sub-menu a.active-link{
+    color: var(--text-color-2);
+    font-weight: 600;
+}
+
+/* text color when link is active*/
+.sidebar.close .nav-links li ul.sub-menu a.active-link{
+    color: var(--text-color-2);
+    font-weight: 600;
+    /*text-shadow: 0 0 10px #9ecaed;*/
+}
+
+.sidebar .nav-links li .sub-menu a:hover{
+    opacity: 1;
+}
+
+.sidebar.close .nav-links .sub-menu .link_name{ /* undeline submenu on hover */
+    border-bottom: 1px solid var(--border-1);
+}
+
+.sidebar.close .nav-links .sub-menu.blank .link_name{ /* remove undeline from tooltips  on hover */
+    border-bottom:0px ;
+}
+
+.sidebar.close .nav-links li a{
+    height: 50px;
+}
+
+
+/*since clas sname is class="sidebar close" with space between words it means div has several classes sidebar and close  */
+.sidebar.close .nav-links li .sub-menu{
+    position: absolute;
+    left: 100%;
+    top: -10px; 
+    margin-top: 0;
+    padding: 10px 16px;
+    border-radius: 6px 6px 6px 6px; /* need follow up*/
+    display: block;
+    opacity: 0; /*makes sub menu invisable but still clickable */
+    pointer-events: none; /* makes sub menu not clickable */
+    transition: 0s;
+}
+
+
+.sidebar.close .nav-links li:hover .sub-menu{
+    top: 0;
+    opacity: 1; /* makes sub menu invisable but still clickable */
+    pointer-events: auto;
+    transition: all 0.4s ease;
+    background: transparent;
+    font-weight: 500;
+    /*border: 1px solid var(--border-1); */
+}
+
+/* since i made submenu bakground transperent i needed a fix for tool tips not to be transpernt */
+.sidebar.close .nav-links li:hover .sub-menu.blank{
+    top: 0;
+    opacity: 1; /* makes sub menu invisable but still clickable */
+    pointer-events: auto;
+    transition: all 0.4s ease;
+    background: var(--bg-color-2);
+    font-weight: 500;
+    /*border: 1px solid var(--border-1); */
+}
+
+.sidebar.close .nav-links li:hover .sub-menu .frame{
+    position: relative;
+    top: -10px;
+    opacity: 1; /* makes sub menu invisable but still clickable */
+    pointer-events: auto;
+    border: 1px solid var(--border-1);
+    background-color:var(--bg-color-2); /* submenu background color */
+    border-radius: 6px 6px 6px 6px; /* need follow up*/
+    padding: 10px 20px;
+
+}
+
+
+/*  prevents the submenu title from appearing twice*/
+.sidebar .nav-links li .sub-menu .link_name{
+    display: none;
+}
+
+.sidebar.close .nav-links li .sub-menu .link_name{
+    font-size: 14px;
+    opacity: 1;
+    display: flex;
+    height: 45px;
+    align-items: center;
+    background-color: var(--bg-color-2); /* closed sidebar - normal item text color*/
+}
+
+
+/* change text color on hover  on submenu when sidebar is closed*/
+.sidebar .nav-links .sub-menu .used_link:hover{
+    color: var(--text-color-2);
+}
+
+
+.sidebar .nav-links li .sub-menu.blank{ /*hidden tooltips when closed */
+
+    padding: 3px 10px 6px 10px; /* pad the hidden tooltips - slightly above, on hover they lower to be centered*/ 
+    opacity: 0;
+    background-color:var(--bg-color-2);
+    pointer-events: none; 
+    border-radius: 10px;
+    margin-left: 15px;
+    border: 0.5px solid var(--border-1);
+}
+
+/* hover when sidebar is closed for items with no submenu - size*/
+.sidebar .nav-links li:hover .sub-menu.blank{
+    height: 50px;
+}
+
+
+
+.home-section{
+    position: absolute;
+    left: 310px;
+    top: 125px;
+    min-height: calc(100% - 150px);
+    width: calc(100% - 335px); /* must have space before and after - sign or it will not work*/
+    background-color: var(--bg-color-2);
+    /*transition: all 0.5s ease;*/
+}
+
+.home-section .Charts{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background-color: var(--bg-color-2);
+    width: 100%;
+}
+
+
+.home-section .Charts .flex-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.sidebar.close ~ .home-section{
+left: 128px;
+width: calc(100% - 153px);
+transition: all 0.5s ease;
+}
+
+
+
+#chart{
+    height: auto;
+    margin-bottom: 25px;
+    width: 100%;
+    background-color: var(--bg-color-1);
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+}
+
+#chart2{
+    margin-right: 25px;
+    background-color: var(--bg-color-1);
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+    width: 100%;
+}
+
+#chart3{
+    background-color: var(--bg-color-1);
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+    width: 100%;
+}
+
+
+.navbar .container .filter-items{
+    display: flex;
+    margin-left: 50px;
+    align-items: center;
+    height: 50px;
+    line-height: 60px;
+    background-color: rgb(255, 255, 255);
+    gap: 4px;
+}
+
+.container span{
+    font-size: 18px;
+    font-weight: 500;
+    padding-right: 100px;
+}
+
+.filter{
+    height: 30px;
+    width: 70px;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.filter:focus{
+    outline:none;
+    border-color:var(--filter-border);
+    box-shadow:0 0 10px var(--filter-border);
+}
+
+.filter:hover { 
+    background-color: var(--bg-color-2);
+}
+
+
+#submit_button{
+    height: 30px;
+    width: 70px;
+    border-radius: 5px;
+    margin-right: 5px;
+    background-color: var(--text-color-2);
+    border: 1.5px solid rgb(83, 83, 83);
+}
+
+#submit_button:hover { 
+    background-color:  var(--hoverTheme-light);
+}
+
+
+
+
+
