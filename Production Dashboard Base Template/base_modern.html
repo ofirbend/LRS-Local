@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatiable" content="IE=edge" />
+    <meta name="viewport" content="width=device-width , initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="base_modern.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <title>LRS Productivety Dashboard</title>
+
+    <!--<img src="Media\Intel_logo_white.png" id="intel_logo_white" /> -->
+  </head>
+
+  <body>
+    <div class="hide-top"></div>
+    <div class="navbar">
+      <div class="top-button">
+        <i class="bx bx-menu" id="btn"></i>
+        <!--<i class="bx bx-chevron-right toggle" id="btn"></i>-->
+      </div>
+
+      <div class="logo">
+        <img class="myImg_dark" src="Media\Intel_logo_dark.png" />
+        <img class="myImg_white" src="Media\Intel_logo_white.png" />
+        <span class="logo_name">Litho Production Dashboard</span>
+      </div>
+
+      <!--
+      <div class="container">
+        <div class="filter-items">
+          <select class="filter" id="site-filter" name="site-filter">
+            <option style="padding: 10px" value="F28">F28</option>
+            <option style="padding: 10px" value="F42">F42</option>
+            <option style="padding: 10px" value="RA3">RA3</option>
+          </select>
+
+          <select class="filter" id="entity-filter" name="entity-filter">
+            <option value="ASML">ASML</option>
+            <option value="Nikon">Nikon</option>
+          </select>
+
+          <select class="filter" id="type-filter" name="type-filter">
+            <option value="Wet">Wet</option>
+            <option value="Dry">Dry</option>
+          </select>
+
+          <input
+            type="submit"
+            value="Submit"
+            id="submit_button"
+            onclick="testfunc()"
+          />
+        </div>
+      </div>
+      -->
+      <div class="ThemeBtn-container">
+        <i class="bx bx-moon" id="theme-btn"></i>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <ul class="nav-links">
+        <li>
+          <a class="used_link" href="#">
+            <i class="bx bx-grid-alt"> </i>
+            <span class="link_name">LFU Report</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li>
+              <a class="link_name" href="#">LFU Report</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <div class="icon-links">
+            <a href="#" class="link-with-submenu">
+              <i class="bx bx-collection"> </i>
+              <span class="link_name">Production Reports</span>
+              <i class="bx bxs-chevron-right arrow"></i>
+            </a>
+            <!-- <i class="bx bxs-chevron-right arrow"></i>-->
+          </div>
+
+          <ul class="sub-menu">
+            <div class="frame">
+              <li><a class="link_name" href="#">Production Reports</a></li>
+              <li><a class="used_link" href="#">Fleet Overview</a></li>
+              <li><a class="used_link" href="#">Entity Breakdown</a></li>
+              <li><a class="used_link" href="#">Entity Statistics</a></li>
+              <li><a class="used_link" href="#">Weekly Breakdown</a></li>
+              <li><a class="used_link" href="#">Wafer Swap Time</a></li>
+            </div>
+          </ul>
+        </li>
+
+        <li>
+          <a class="used_link" href="#">
+            <i class="bx bx-line-chart"></i>
+            <span class="link_name">SAU Tactic Dispatch</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li>
+              <a class="used_link link_name" href="#">SAU Tactic Dispatch</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a class="used_link" href="#">
+            <i class="bx bx-stats"></i>
+            <span class="link_name">193BE Tactic Dispatch</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">193BE Tactic Dispatch</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a class="used_link" href="#">
+            <i class="bx bxl-graphql"></i>
+            <span class="link_name">Reg Tactic Dispatch</span>
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="#">Reg Tactic Dispatch</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <section class="home-section">
+      <div class="Charts">
+        <div id="chart"></div>
+
+        <div class="flex-container">
+          <div id="chart2"></div>
+
+          <div id="chart3"></div>
+        </div>
+      </div>
+    </section>
+
+    <script src="media\apex.js"></script>
+    <script>
+      var white = document.querySelector(".myImg_white");
+      var dark = document.querySelector(".myImg_dark");
+
+      function HideImg() {
+        white.style.display = "none";
+      }
+
+      // create marker of currently used link
+      const navLinks = document.querySelectorAll(".used_link");
+      navLinks.forEach((navLink) => {
+        navLink.addEventListener("click", () => {
+          document
+            .querySelector(".active-link")
+            ?.classList.remove(
+              "active-link"
+            ); /* ? checks if active link doesnt exist do nothing - if exist remove*/
+          navLink.classList.add("active-link");
+        });
+      });
+
+      // function to get data from filters
+      function testfunc() {
+        const site = document.querySelector("#site-filter");
+        const entity = document.querySelector("#entity-filter");
+        const type = document.querySelector("#type-filter");
+
+        var s = site.value;
+        var e = entity.value;
+        var f = type.value;
+        //entity.style.color = "red";
+        alert(s + " " + e + " " + f);
+      }
+
+      //ddd
+      let arrow = document.querySelectorAll(".link-with-submenu");
+
+      for (var i = 0; i < arrow.length; i++) {
+        arrow[i].addEventListener("click", (e) => {
+          let arrowParent = e.target.parentElement.parentElement.parentElement;
+          arrowParent.classList.toggle("showMenu");
+        });
+      }
+
+      // theme button change icon
+      let ThemeBtn = document.querySelector("#theme-btn");
+
+      // theme button change icon
+      ThemeBtn.onclick = function () {
+        ThemeBtn.classList.toggle("active");
+        ThemeIconChange();
+      };
+
+      function ThemeIconChange() {
+        if (ThemeBtn.classList.contains("active")) {
+          document.body.classList.add("active");
+          ThemeBtn.classList.replace("bx-moon", "bx-sun");
+
+          white.style.display = "inline";
+          dark.style.display = "none";
+        } else {
+          document.body.classList.remove("active");
+          ThemeBtn.classList.replace("bx-sun", "bx-moon");
+
+          white.style.display = "none";
+          dark.style.display = "inline";
+        }
+      }
+
+      // Open or close sidebar and change icon
+      let btn = document.querySelector("#btn");
+      let sidbar = document.querySelector(".sidebar");
+
+      btn.onclick = function () {
+        sidbar.classList.toggle("close");
+        BtnIconChange();
+      };
+
+      function BtnIconChange() {
+        if (sidbar.classList.contains("close")) {
+          btn.classList.replace("bx-menu", "bx-menu-alt-right");
+        } else {
+          btn.classList.replace("bx-menu-alt-right", "bx-menu");
+        }
+      }
+    </script>
+  </body>
+</html>
