@@ -24,10 +24,33 @@ def regLandingPage():
 
 @blueprint.route('/LFU_Report', methods=["POST","GET"])
 def LFU_Report():
-    #if request.method != "POST":
-    #    print("hello")
-    # show the form, it wasn't submitted
-    return render_template('LFU_Report.html', page_name = 'LFU_Report' , sub_menu_apps = sub_menu_apps)
+
+    header = ['WW',	'FAB',	'WEIGHTED_LFU',	'OUTS']
+
+    table = [
+                ['ASML', 'Wet', '202313', 'F28', 0.794, 2308.36],
+                ['ASML', 'Wet', '202313', 'F32', 0.688, 2056.85],
+                ['ASML', 'Wet', '202314', 'F28', 0.795, 2381.41],
+                ['ASML', 'Wet', '202314', 'F32', 0.698, 1757.46],
+                ['ASML', 'Wet', '202315', 'F28', 0.799, 2210.2],
+                ['ASML', 'Wet', '202315', 'F32', 0.694, 1992.65],
+                ['ASML', 'Wet', '202316', 'F28', 0.824, 1877.85],
+                ['ASML', 'Wet', '202316', 'F32', 0.689, 2272.61],
+                ['ASML', 'Wet', '202317', 'F28', 0.835, 1641.22],
+                ['ASML', 'Wet', '202317', 'F32', 0.688, 1915.91]
+            ]
+
+    #y-axsis
+    #data = [row[2] for row in table]
+
+    #x-axsis
+    #categories = [row[0] for row in table]
+    
+    #print(data)
+    #print(categories)
+
+
+    return render_template('LFU_Report.html', page_name = 'LFU_Report' , table = table)
 
 
 @blueprint.route('/Fleet_Overview')
