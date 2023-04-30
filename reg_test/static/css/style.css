@@ -116,7 +116,7 @@ body.active .myImg_dark{
 
   .navbar .top-button {
     color:var( --text-color-1);
-    font-size: 25px;
+    font-size: 26px;
     padding-left: 3%;
     padding-right: 3%;
   }
@@ -127,30 +127,28 @@ body.active .myImg_dark{
 
 
   .navbar .ThemeBtn-container {
-    height: 40px;
-    width: 40px;
+    color:var( --text-color-1);
     position: absolute;
+    font-size: 26px;
     right: 3%;
-    border-radius: 100%;
-    opacity: 1;
-    background-color: var(--bg-color-1);
-    display: flex;
-    align-items: center; /* dosent work with the deafult display: block so i changed to flex so it will work*/
   }
 
   .navbar .ThemeBtn-container #theme-btn {
-    padding-left: 8px; /* center icon in container*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     cursor: pointer;
-    font-size: 24px;
-    color: var( --text-color-1);
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
   }
 
-  .navbar .ThemeBtn-container:hover {
-    background-color: var(--hoverTheme-light);
-    transition: all 0.5s ease;
-  }
+
 
   .navbar .ThemeBtn-container #theme-btn:hover{
+    background-color: var(--hoverTheme-light);
+    transition: all 0.5s ease;
     color: var(--bg-color-1);
   } 
 
@@ -165,7 +163,7 @@ body.active .myImg_dark{
     z-index: 100;
     border-right: 1px solid var(--border-1);
     border-radius: 10px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .sidebar.close{
@@ -257,7 +255,7 @@ transform: rotate(90deg); /* when clicked rotate arrow by 990 degrees*/
 }
 
 .sidebar .nav-links li a .link_name{
-    font-size: 14px; /*nane size */
+    font-size: 14px; /*name size */
     font-weight: 400;
     color: var(--text-color-1);
     transition: all 0.1s ease;
@@ -347,7 +345,7 @@ transform: rotate(90deg); /* when clicked rotate arrow by 990 degrees*/
     top: 0;
     opacity: 1; /* makes sub menu invisable but still clickable */
     pointer-events: auto;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
     background: transparent;
     font-weight: 500;
     /*border: 1px solid var(--border-1); */
@@ -358,7 +356,7 @@ transform: rotate(90deg); /* when clicked rotate arrow by 990 degrees*/
     top: 0;
     opacity: 1; /* makes sub menu invisable but still clickable */
     pointer-events: auto;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
     background: var(--bg-color-2);
     font-weight: 500;
     /*border: 1px solid var(--border-1); */
@@ -423,7 +421,7 @@ transform: rotate(90deg); /* when clicked rotate arrow by 990 degrees*/
     min-height: calc(100% - 150px);
     width: calc(100% - 335px); /* must have space before and after - sign or it will not work*/
     background-color: var(--bg-color-2);
-    /*transition: all 0.5s ease;*/
+    transition: all 0.3s ease;
 }
 
 .home-section .Charts{
@@ -445,7 +443,6 @@ transform: rotate(90deg); /* when clicked rotate arrow by 990 degrees*/
 .sidebar.close ~ .home-section{
 left: 128px;
 width: calc(100% - 153px);
-transition: all 0.5s ease;
 }
 
 
@@ -474,53 +471,17 @@ transition: all 0.5s ease;
     width: 100%;
 }
 
-
-.navbar .container .filter-items{
-    display: flex;
-    margin-left: 50px;
-    align-items: center;
-    height: 50px;
-    line-height: 60px;
-    background-color: rgb(255, 255, 255);
-    gap: 4px;
-}
-
-.container span{
-    font-size: 18px;
-    font-weight: 500;
-    padding-right: 100px;
-}
-
-.filter{
-    height: 30px;
-    width: 70px;
-    border-radius: 5px;
-    margin-right: 5px;
-}
-
-.filter:focus{
-    outline:none;
-    border-color:var(--filter-border);
-    box-shadow:0 0 10px var(--filter-border);
-}
-
-.filter:hover { 
-    background-color: var(--bg-color-2);
+#chart_lfu{
+    height: auto;
+    margin-bottom: 25px;
+    width: 100%;
+    background-color: var(--bg-color-1);
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
 }
 
 
-#submit_button{
-    height: 30px;
-    width: 70px;
-    border-radius: 5px;
-    margin-right: 5px;
-    background-color: var(--text-color-2);
-    border: 1.5px solid rgb(83, 83, 83);
-}
 
-#submit_button:hover { 
-    background-color:  var(--hoverTheme-light);
-}
 
 
 
