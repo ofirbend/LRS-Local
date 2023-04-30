@@ -18,10 +18,12 @@
       rel="stylesheet"
       href="{{ url_for('reg_test.static', filename='css/style.css') }}"
     />
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <title>LRS Productivety Dashboard</title>
+    {% block css %}{% endblock %}
 
-    <!--<img src="Media\Intel_logo_white.png" id="intel_logo_white" /> -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script> -->
+    <script src="{{url_for('reg_test.static', filename='js/apexcharts.js')}}"></script>
+    <title>{% block title %} LRS Productivety Dashboard {% endblock %} </title> 
+    
   </head>
 
   <body>
@@ -29,43 +31,16 @@
     <div class="navbar">
       <div class="top-button">
         <i class="bx bx-menu" id="btn"></i>
-        <!--<i class="bx bx-chevron-right toggle" id="btn"></i>-->
       </div>
 
+      
+
       <div class="logo">
-        <img class="myImg_dark" src="Media\Intel_logo_dark.png" />
-        <img class="myImg_white" src="Media\Intel_logo_white.png" />
+        <img class="myImg_dark" src="{{url_for('reg_test.static', filename='img/Intel_logo_dark.png')}}" />
+        <img class="myImg_white" src="{{url_for('reg_test.static', filename='img/Intel_logo_white.png')}}"/>
         <span class="logo_name">Litho Production Dashboard</span>
       </div>
 
-      <!--
-      <div class="container">
-        <div class="filter-items">
-          <select class="filter" id="site-filter" name="site-filter">
-            <option style="padding: 10px" value="F28">F28</option>
-            <option style="padding: 10px" value="F42">F42</option>
-            <option style="padding: 10px" value="RA3">RA3</option>
-          </select>
-
-          <select class="filter" id="entity-filter" name="entity-filter">
-            <option value="ASML">ASML</option>
-            <option value="Nikon">Nikon</option>
-          </select>
-
-          <select class="filter" id="type-filter" name="type-filter">
-            <option value="Wet">Wet</option>
-            <option value="Dry">Dry</option>
-          </select>
-
-          <input
-            type="submit"
-            value="Submit"
-            id="submit_button"
-            onclick="testfunc()"
-          />
-        </div>
-      </div>
-      -->
       <div class="ThemeBtn-container">
         <i class="bx bx-moon" id="theme-btn"></i>
       </div>
@@ -74,7 +49,7 @@
     <div class="sidebar">
       <ul class="nav-links">
         <li>
-          <a class="used_link" href="#">
+          <a class="used_link {% if 'LFU' in page_name %} active-link {% endif %}"  href ="{{ url_for('reg_test.LFU_Report') }}">
             <i class="bx bx-grid-alt"> </i>
             <span class="link_name">LFU Report</span>
           </a>
@@ -85,6 +60,7 @@
           </ul>
         </li>
 
+        <!--<li class="{% if page_name in sub_menu_apps %} showMenu {% endif %}"> -->
         <li>
           <div class="icon-links">
             <a href="#" class="link-with-submenu">
@@ -92,23 +68,24 @@
               <span class="link_name">Production Reports</span>
               <i class="bx bxs-chevron-right arrow"></i>
             </a>
-            <!-- <i class="bx bxs-chevron-right arrow"></i>-->
-          </div>
 
+          </div>
+          
           <ul class="sub-menu">
             <div class="frame">
               <li><a class="link_name" href="#">Production Reports</a></li>
-              <li><a class="used_link" href="#">Fleet Overview</a></li>
-              <li><a class="used_link" href="#">Entity Breakdown</a></li>
-              <li><a class="used_link" href="#">Entity Statistics</a></li>
-              <li><a class="used_link" href="#">Weekly Breakdown</a></li>
-              <li><a class="used_link" href="#">Wafer Swap Time</a></li>
+              <li><a class="used_link {% if 'Fleet_Overview' in page_name %} active-link {% endif %}"  href ="{{ url_for('reg_test.Fleet_Overview') }}">Fleet Overview</a></li>
+              <li><a class="used_link {% if 'Entity_Breakdown' in page_name %} active-link {% endif %}"  href ="{{ url_for('reg_test.Entity_Breakdown') }}">Entity Breakdown</a></li>
+              <li><a class="used_link {% if 'Entity_Statistics' in page_name %} active-link {% endif %}"  href ="{{ url_for('reg_test.Entity_Statistics') }}">Entity Statistics</a></li>
+              <li><a class="used_link {% if 'Weekly_Breakdown' in page_name %} active-link {% endif %}"  href ="{{ url_for('reg_test.Weekly_Breakdown') }}">Weekly Breakdown</a></li>
+              <li><a class="used_link {% if 'Wafer_Swap' in page_name %} active-link {% endif %}"  href ="{{ url_for('reg_test.Wafer_Swap_Time') }}">Wafer Swap Time</a></li>
+
             </div>
           </ul>
         </li>
 
         <li>
-          <a class="used_link" href="#">
+          <a class="used_link {% if 'SAU' in page_name %} active-link {% endif %}" href ="{{ url_for('reg_test.SAU_Tactic_Dispatch') }}">
             <i class="bx bx-line-chart"></i>
             <span class="link_name">SAU Tactic Dispatch</span>
           </a>
@@ -120,7 +97,7 @@
         </li>
 
         <li>
-          <a class="used_link" href="#">
+          <a class="used_link {% if '193BE' in page_name %} active-link {% endif %}" href ="{{ url_for('reg_test.Tactic_Dispatch_193BE') }}">
             <i class="bx bx-stats"></i>
             <span class="link_name">193BE Tactic Dispatch</span>
           </a>
@@ -130,7 +107,7 @@
         </li>
 
         <li>
-          <a class="used_link" href="#">
+          <a class="used_link {% if 'Reg' in page_name %} active-link {% endif %}" href ="{{ url_for('reg_test.Reg_Tactic_Dispatch') }}">
             <i class="bx bxl-graphql"></i>
             <span class="link_name">Reg Tactic Dispatch</span>
           </a>
@@ -141,94 +118,15 @@
       </ul>
     </div>
 
-    <section class="home-section">{% block content %} {% endblock %}</section>
+    <section class="home-section">
+      {% block content %} 
+      {% block header %}{% endblock %}
+      {% endblock %}</section>
 
-    <script src="media\apex.js"></script>
-    <script>
-      var white = document.querySelector(".myImg_white");
-      var dark = document.querySelector(".myImg_dark");
+    
+    <!--<script src="{{url_for('reg_test.static', filename='js/content_scripts.js')}}"></script>-->
+    <script src="{{url_for('reg_test.static', filename='js/base_functions.js')}}"></script>
+    {% block javascripts %}{% endblock javascripts %}
 
-      function HideImg() {
-        white.style.display = "none";
-      }
-
-      // create marker of currently used link
-      const navLinks = document.querySelectorAll(".used_link");
-      navLinks.forEach((navLink) => {
-        navLink.addEventListener("click", () => {
-          document
-            .querySelector(".active-link")
-            ?.classList.remove(
-              "active-link"
-            ); /* ? checks if active link doesnt exist do nothing - if exist remove*/
-          navLink.classList.add("active-link");
-        });
-      });
-
-      // function to get data from filters
-      function testfunc() {
-        const site = document.querySelector("#site-filter");
-        const entity = document.querySelector("#entity-filter");
-        const type = document.querySelector("#type-filter");
-
-        var s = site.value;
-        var e = entity.value;
-        var f = type.value;
-        //entity.style.color = "red";
-        alert(s + " " + e + " " + f);
-      }
-
-      //ddd
-      let arrow = document.querySelectorAll(".link-with-submenu");
-
-      for (var i = 0; i < arrow.length; i++) {
-        arrow[i].addEventListener("click", (e) => {
-          let arrowParent = e.target.parentElement.parentElement.parentElement;
-          arrowParent.classList.toggle("showMenu");
-        });
-      }
-
-      // theme button change icon
-      let ThemeBtn = document.querySelector("#theme-btn");
-
-      // theme button change icon
-      ThemeBtn.onclick = function () {
-        ThemeBtn.classList.toggle("active");
-        ThemeIconChange();
-      };
-
-      function ThemeIconChange() {
-        if (ThemeBtn.classList.contains("active")) {
-          document.body.classList.add("active");
-          ThemeBtn.classList.replace("bx-moon", "bx-sun");
-
-          white.style.display = "inline";
-          dark.style.display = "none";
-        } else {
-          document.body.classList.remove("active");
-          ThemeBtn.classList.replace("bx-sun", "bx-moon");
-
-          white.style.display = "none";
-          dark.style.display = "inline";
-        }
-      }
-
-      // Open or close sidebar and change icon
-      let btn = document.querySelector("#btn");
-      let sidbar = document.querySelector(".sidebar");
-
-      btn.onclick = function () {
-        sidbar.classList.toggle("close");
-        BtnIconChange();
-      };
-
-      function BtnIconChange() {
-        if (sidbar.classList.contains("close")) {
-          btn.classList.replace("bx-menu", "bx-menu-alt-right");
-        } else {
-          btn.classList.replace("bx-menu-alt-right", "bx-menu");
-        }
-      }
-    </script>
   </body>
 </html>

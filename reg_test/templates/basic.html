@@ -1,3 +1,9 @@
-{% extends "layout_base.html" %} {% block content %}
-<div>page 1</div>
+{% extends "layout_base.html" %} 
+{% block content %}
+
+{% block title %} {{page_name}} {% endblock %}
+
+    <div id="chart"></div>
+
 {% endblock %}
+
