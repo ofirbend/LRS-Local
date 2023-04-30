@@ -1,8 +1,115 @@
 
 {% extends "layout_base.html" %} 
+
+{% block title %} {{page_name}} {% endblock %}
+
+{% block css %}
+<link
+rel="stylesheet"
+href="{{ url_for('reg_test.static', filename='css/style_lfu.css') }}"
+/>
+{% endblock %}
+
 {% block content %}
 
-<h1>LFU_Report</h1>
+<!--{% block header %} {{page_name}} {% endblock %} -->
+
+
+{% block filter %} 
+
+<div class="container">
+  <div class="filter-items">
+    <select class="filter" id="site-filter" name="site-filter">
+      <option value="All_Sites">All Sites</option>
+      <option value="F28">F28</option>
+      <option value="F42">F42</option>
+      <option value="RA3">RA3</option>
+    </select>
+
+    <select class="filter" id="entity-filter" name="entity-filter">
+      <option value="ASML">ASML</option>
+      <option value="Nikon">Nikon</option>
+    </select>
+    
+    <select class="filter" id="type-filter" name="type-filter">
+      <option id = "asml_option"value="Wet">Wet</option>
+      <option id = "asml_option"value="Dry">Dry</option>
+      <option id = "nikon_option" value="SNE">SNE</option>
+      <option id = "nikon_option" value="STB">STB</option>
+      <option id = "nikon_option" value="SNU">SNU</option>
+    </select>
+
+    <input
+      type="submit"
+      value="Submit"
+      id="submit_button"
+      onclick="Get_filter_values()"
+    />
+  </div>
+</div>
+
+<div id="chart"></div>
 
 
 {% endblock %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="{{url_for('reg_test.static', filename='js/filter.js')}}"></script> 
+<script>
+  
+  // declare chart here so it becomes a global variable 
+  var chart = null;
+
+  var f28_data_x = [];
+  var f28_data_y = [];
+  var f32_data_x = [];
+  var f32_data_y = [];
+  var ra3_data_x = [];
+  var ra3_data_y = [];
+
+  var table_data = {{ table | safe }}
+
+  let current_site = sessionStorage.getItem("site_filter");
+  let current_entity = sessionStorage.getItem("entity_filter");
+  let current_type = sessionStorage.getItem("type_filter");
+
+
+  filtered_data_array = filter_Data(table_data, current_site, current_entity, current_type)
+  
+  for (var i=0; i < filtered_data_array[0].length;++i){
+    f28_data_x.push(filtered_data_array[0][i][2]) 
+    f28_data_y.push(filtered_data_array[0][i][4])   
+  }
+
+  for (var i=0; i < filtered_data_array[1].length;++i){
+    f32_data_x.push(filtered_data_array[1][i][2]) 
+    f32_data_y.push(filtered_data_array[1][i][4])  
+  }
+
+  for (var i=0; i < filtered_data_array[2].length;++i){
+    ra3_data_x.push(filtered_data_array[1][i][2]) 
+    ra3_data_y.push(filtered_data_array[1][i][4])  
+  }
+
+
+  series_x = [f28_data_x, f32_data_x, ra3_data_x] 
+  series_y = [f28_data_y, f32_data_y, ra3_data_y]
+
+  // first time running - create chart
+  if (chart == null){
+      render_charts(series_x, series_y) 
+  }
+  else{
+      update_chart(series_x, series_y)
+  }
+  
+
+
+</script>
+
+{% endblock javascripts %}
+

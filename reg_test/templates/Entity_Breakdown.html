@@ -2,10 +2,13 @@
 
 
 {% extends "layout_base.html" %} 
+
+{% block title %} {{page_name}} {% endblock %}
+
 {% block content %}
 
-<h1>Entity_Breakdown</h1>
+<!--{% block header %} {{page_name}} {% endblock %} -->
 
-    <div id="chart3"></div>
+<div id="chart3"></div>
 
 {% endblock %}

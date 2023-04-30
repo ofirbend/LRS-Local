@@ -1,10 +1,60 @@
 
-
 {% extends "layout_base.html" %} 
+
+{% block title %} {{page_name}} {% endblock %}
+
+{% block css %}
+<link
+rel="stylesheet"
+href="{{ url_for('reg_test.static', filename='css/style_lfu.css') }}"
+/>
+{% endblock %}
+
 {% block content %}
 
-<h1>SAU_Tactic_Dispatch</h1>
+<!--{% block header %} {{page_name}} {% endblock %} -->
 
-    <div id="chart"></div>
+
+{% block filter %} 
+
+<div class="container">
+  <div class="filter-items">
+    <select class="filter" id="site-filter" name="site-filter">
+      <option style="padding: 10px" value="F28">F28</option>
+      <option style="padding: 10px" value="F42">F42</option>
+      <option style="padding: 10px" value="RA3">RA3</option>
+    </select>
+
+    <select class="filter" id="entity-filter" name="entity-filter">
+      <option value="ASML">ASML</option>
+      <option value="Nikon">Nikon</option>
+    </select>
+
+    <select class="filter" id="type-filter" name="type-filter">
+      <option value="Wet">Wet</option>
+      <option value="Dry">Dry</option>
+    </select>
+
+    <input
+      type="submit"
+      value="Submit"
+      id="submit_button"
+      onclick="testfunc()"
+    />
+  </div>
+</div>
+
+<div id="chart3"></div>
+
 
 {% endblock %}
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="{{url_for('reg_test.static', filename='js/filter.js')}}"></script>
+
+{% endblock javascripts %}
+
