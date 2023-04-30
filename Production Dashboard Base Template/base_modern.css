@@ -118,7 +118,7 @@ body.active .myImg_dark{
 
   .navbar .top-button {
     color:var( --text-color-1);
-    font-size: 26px;
+    font-size: 25px;
     padding-left: 3%;
     padding-right: 3%;
   }
@@ -129,31 +129,30 @@ body.active .myImg_dark{
 
 
   .navbar .ThemeBtn-container {
-    color:var( --text-color-1);
+    height: 40px;
+    width: 40px;
     position: absolute;
-    font-size: 26px;
     right: 3%;
+    border-radius: 100%;
+    opacity: 1;
+    background-color: var(--bg-color-1);
+    display: flex;
+    align-items: center; /* dosent work with the deafult display: block so i changed to flex so it will work*/
   }
 
   .navbar .ThemeBtn-container #theme-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    padding-left: 8px; /* center icon in container*/
     cursor: pointer;
-    border-radius: 100%;
-    width: 40px;
-    height: 40px;
+    font-size: 24px;
+    color: var( --text-color-1);
   }
-/*
+
   .navbar .ThemeBtn-container:hover {
     background-color: var(--hoverTheme-light);
     transition: all 0.5s ease;
   }
-*/
+
   .navbar .ThemeBtn-container #theme-btn:hover{
-    background-color: var(--hoverTheme-light);
-    transition: all 0.5s ease;
     color: var(--bg-color-1);
   } 
 
@@ -453,15 +452,6 @@ transition: all 0.5s ease;
 
 
 
-#chart_lfu{
-    height: auto;
-    margin-bottom: 25px;
-    width: 100%;
-    background-color: var(--bg-color-1);
-    border-radius: 15px;
-    box-shadow: var(--box-shadow);
-}
-
 #chart{
     height: auto;
     margin-bottom: 25px;
@@ -535,8 +525,6 @@ transition: all 0.5s ease;
 }
 
 
-#nikon_option{
-    display: none;
-}
+
 
 
